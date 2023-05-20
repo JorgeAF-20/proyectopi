@@ -1,0 +1,14 @@
+{
+  "resourceName": "StorageS3",
+  "policyUUID": "2bbb0317",
+  "bucketName": "storagepi",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

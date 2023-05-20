@@ -1,4 +1,28 @@
 {
+  "api": {
+    "apiproyecto": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "lambdaalumnosclase"
+        },
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "lambdaasignaturas"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
   "auth": {
     "frontendb592a2c3": {
       "customAuth": false,
@@ -23,6 +47,59 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "lambdaalumnosclase": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "lambdaasignaturas": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_lambdaalumnosclase_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "lambdaalumnosclase"
+        }
+      ]
+    },
+    "AMPLIFY_function_lambdaalumnosclase_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "lambdaalumnosclase"
+        }
+      ]
+    },
+    "AMPLIFY_function_lambdaasignaturas_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "lambdaasignaturas"
+        }
+      ]
+    },
+    "AMPLIFY_function_lambdaasignaturas_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "lambdaasignaturas"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "StorageS3": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
     }
   }
 }

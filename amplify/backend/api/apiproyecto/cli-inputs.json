@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "paths": {
+    "/clase/{id}": {
+      "name": "/clase/{id}",
+      "lambdaFunction": "lambdaalumnosclase",
+      "permissions": {
+        "setting": "open"
+      }
+    },
+    "/asignaturas": {
+      "name": "/asignaturas",
+      "lambdaFunction": "lambdaasignaturas",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

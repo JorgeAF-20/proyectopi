@@ -14,6 +14,22 @@
     "categories": {
       "auth": {
         "frontendb592a2c3": {}
+      },
+      "storage": {
+        "StorageS3": {}
+      },
+      "function": {
+        "lambdaalumnosclase": {
+          "deploymentBucketName": "amplify-frontend-dev-220015-deployment",
+          "s3Key": "amplify-builds/lambdaalumnosclase-364e623464394464464c-build.zip"
+        },
+        "lambdaasignaturas": {
+          "deploymentBucketName": "amplify-frontend-dev-220015-deployment",
+          "s3Key": "amplify-builds/lambdaasignaturas-7a45436355714556552f-build.zip"
+        }
+      },
+      "api": {
+        "apiproyecto": {}
       }
     }
   }
