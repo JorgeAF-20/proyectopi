@@ -47,6 +47,22 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    },
+    "userPoolGroups": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId",
+            "AppClientIDWeb",
+            "AppClientID",
+            "IdentityPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "frontendb592a2c3"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito-UserPool-Groups"
     }
   },
   "function": {
@@ -56,6 +72,11 @@
       "service": "Lambda"
     },
     "lambdaasignaturas": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "postConfirmation": {
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
@@ -91,6 +112,22 @@
         {
           "category": "function",
           "resourceName": "lambdaasignaturas"
+        }
+      ]
+    },
+    "AMPLIFY_function_postConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "postConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_postConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "postConfirmation"
         }
       ]
     }

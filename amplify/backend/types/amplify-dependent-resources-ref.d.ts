@@ -15,6 +15,11 @@ export type AmplifyDependentResourcesAttributes = {
       "UserPoolArn": "string",
       "UserPoolId": "string",
       "UserPoolName": "string"
+    },
+    "userPoolGroups": {
+      "administradoresGroupRole": "string",
+      "alumnosGroupRole": "string",
+      "profesoresGroupRole": "string"
     }
   },
   "function": {
@@ -26,6 +31,13 @@ export type AmplifyDependentResourcesAttributes = {
       "Region": "string"
     },
     "lambdaasignaturas": {
+      "Arn": "string",
+      "LambdaExecutionRole": "string",
+      "LambdaExecutionRoleArn": "string",
+      "Name": "string",
+      "Region": "string"
+    },
+    "postConfirmation": {
       "Arn": "string",
       "LambdaExecutionRole": "string",
       "LambdaExecutionRoleArn": "string",

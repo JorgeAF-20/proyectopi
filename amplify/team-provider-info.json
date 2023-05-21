@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "frontendb592a2c3": {}
+        "frontendb592a2c3": {},
+        "userPoolGroups": {}
       },
       "storage": {
         "StorageS3": {}
@@ -26,6 +27,10 @@
         "lambdaasignaturas": {
           "deploymentBucketName": "amplify-frontend-dev-220015-deployment",
           "s3Key": "amplify-builds/lambdaasignaturas-7a45436355714556552f-build.zip"
+        },
+        "postConfirmation": {
+          "deploymentBucketName": "amplify-frontend-dev-220015-deployment",
+          "s3Key": "amplify-builds/postConfirmation-2f474733397763586841-build.zip"
         }
       },
       "api": {
