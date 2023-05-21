@@ -9,56 +9,46 @@ import { Card, Typography } from '@mui/material';
 
 const useStyles = makeStyles(styles);
 
-function LinkS3 ({data, level}) {
-  return (
-    <>
-      <Grid xs={12}><Typography>{level}</Typography></Grid>
-      {data.map(item => {
-        return (
-          <Grid xs={4}>
-            <a href={item.signedURL} target="_blank" rel="noreferrer">
-              {item.name}
-            </a>
-          </Grid> 
-        )
-      })}
-    </>
-  );
-}
-
-export default function Directory( {level="public"} ) {
+export default function Directory( {level="public", newRender} ) {
   const [files, setFiles] = useState([]);
   const classes = useStyles();
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const loadList = useCallback(() => {
-    Storage.list('', { level: level }) 
-    .then(({ results }) =>
-      {
-        console.log(results);
-        const tempFiles = [];
-        // eslint-disable-next-line array-callback-return
-        results.map(item => {
-          Storage.get(item.key, {level: level}).then((signedURL) => tempFiles.push({signedURL: signedURL, name: item.key}));
-          // Storage.get(item.key, {level: 'private'}).then((signedURL) => setFiles([...files, {signedURL: signedURL, name: item.key}]));
-        })
-        console.log(tempFiles)
-        setFiles(tempFiles)
-      }
-    )
-    .catch((err) => console.log(err));
-  })
   
   useEffect(() => {
+    const loadList = async () => {
+      let tempFiles = [];
+      try {
+        const key = await Storage.list('', { level: level, pageSize : 'ALL', cacheControl: 'no-cache' }) 
+        key.results.map(async item => {
+          const result = await Storage.get(item.key, {level: level})
+          tempFiles.push({signedURL: result, name: item.key});
+          setFiles(tempFiles)
+        })
+
+      }
+      catch (err) {
+        console.log(err)
+      }
+    }
+
     loadList();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[]);
+  },[newRender, level]);
 
   return (
-    <Card>
-      <Grid container columnSpacing={2} className={classes.root}>
-        <LinkS3 data={files} level={level}/>     
-      </Grid>  
-    </Card>
+    <Grid mt={2}>
+      <Card>
+        <Grid container columnSpacing={2} className={classes.root}>
+          <Grid xs={12}><Typography variant='h5' sx={{ paddingLeft: 2 }}>{level}</Typography></Grid>
+          {files.map(item => {
+            return (
+              < Grid xs={4} pl={3} pb={1} key={item.name}>
+                <a href={item.signedURL} target="_blank" rel="noreferrer">
+                  {item.name}
+                </a>
+              </Grid> 
+            )
+          })}
+        </Grid>  
+      </Card>
+    </Grid>
   )
 }
