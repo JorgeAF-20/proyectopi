@@ -26,7 +26,7 @@
         },
         "lambdaasignaturas": {
           "deploymentBucketName": "amplify-frontend-dev-220015-deployment",
-          "s3Key": "amplify-builds/lambdaasignaturas-7a45436355714556552f-build.zip"
+          "s3Key": "amplify-builds/lambdaasignaturas-71515747346163763370-build.zip"
         },
         "postConfirmation": {
           "deploymentBucketName": "amplify-frontend-dev-220015-deployment",
