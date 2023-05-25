@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useState} from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import '@aws-amplify/ui-react/styles.css';
 import { makeStyles } from '@mui/styles';
@@ -16,24 +16,14 @@ import { Card, Typography } from '@mui/material';
 
 const useStyles = makeStyles(styles);
 
-function createData(name, aula, profesor) {
-  return { name, aula, profesor };
-}
-
-const rows = [
-  createData('Matematicas', 121, 'Luis'),
-  createData('Dibujo', 134, 'Jesus'),
-  createData('Ingles', 201, 'Luis'),
-  createData('Informatica', 215, 'Jesus'),
-];
-
 export default function Asignaturas() {
+  const [asig, setAsig] = useState([]);
   const classes = useStyles();
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await Axios.get(`https://02hk6jsbrg.execute-api.eu-west-3.amazonaws.com/dev/asignaturas`);
-      console.log(res.data);
+      const res = await Axios.get(`https://eygko4qm4d.execute-api.eu-west-3.amazonaws.com/dev/asignaturas`);
+      setAsig(res.data);
     };
     fetchData();
   }, []);
@@ -54,16 +44,16 @@ export default function Asignaturas() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
+                  {asig.map((row) => (
                     <TableRow
-                      key={row.name}
+                      key={row.Asignatura}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                       <TableCell component="th" scope="row">
-                        {row.name}
+                        {row.Asignatura}
                       </TableCell>
-                      <TableCell align="right">{row.aula}</TableCell>
-                      <TableCell align="right">{row.profesor}</TableCell>
+                      <TableCell align="right">{row.Aula}</TableCell>
+                      <TableCell align="right">{row.Profesor}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, { useEffect, useState} from 'react';
 import Grid from '@mui/material/Unstable_Grid2';
 import '@aws-amplify/ui-react/styles.css';
 import { makeStyles } from '@mui/styles';
@@ -16,24 +16,14 @@ import { Card, Typography } from '@mui/material';
 
 const useStyles = makeStyles(styles);
 
-function createData(name, email) {
-  return { name, email };
-}
-
-const rows = [
-  createData('Jose', 'jose@gmail.com'),
-  createData('Roberto', 'roberto@gmail.com'),
-  createData('Rafa', 'rafa@gmail.com'),
-];
-
 export default function Alumnos() {
-
+  const [alum, setAlum] = useState([])
   const classes = useStyles();
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await Axios.get(`https://02hk6jsbrg.execute-api.eu-west-3.amazonaws.com/dev/asignaturas`);
-      console.log(res.data);
+      const res = await Axios.get(`https://eygko4qm4d.execute-api.eu-west-3.amazonaws.com/dev/alumnos`);
+      setAlum(res.data);
     };
     fetchData();
   }, []);
@@ -53,13 +43,13 @@ export default function Alumnos() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
+                  {alum.map((row) => (
                     <TableRow
-                      key={row.name}
+                      key={row.ID}
                       sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
-                      <TableCell component="th" scope="row">{row.name}</TableCell>
-                      <TableCell align="right">{row.email}</TableCell>
+                      <TableCell component="th" scope="row">{row.Nombre}</TableCell>
+                      <TableCell align="right">{row.Correo}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
