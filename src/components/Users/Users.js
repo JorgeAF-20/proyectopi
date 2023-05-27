@@ -18,16 +18,19 @@ import { Auth } from 'aws-amplify';
 
 const useStyles = makeStyles(styles);
 
-async function signUp( username, password, email, groupname) {
+async function signUp( username, password, email, groupname, reset) {
+  const Grupo = (groupname === 'profesor') ? 'profesores' : 'alumnos'
   try {
     const { user } = await Auth.signUp({
       username,
       password,
       attributes: {
         email,
+        'custom:Grupo': Grupo
       },
     });
     console.log(user);
+    reset();
   } catch (error) {
     console.log('error signing up:', error);
   }
@@ -43,16 +46,24 @@ export default function Users() {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
+  const resetData = () => {
+    setNombre('')
+    setEmail('')
+    setPassword('')
+    setTypeUser('profesor')
+    setShowPassword(false)
+  }
+
   return (
     <Card>
       <Grid container columnSpacing={2} rowSpacing={1} p={2} className={classes.root}>
         <Grid container xs={12}>
           <Grid xs={2}>
-            <Button variant="contained" size="large" endIcon={<GroupAddIcon />}   onClick={(event) => signUp(nombre, password, email, typeUser)}>
+            <Button variant="contained" size="large" endIcon={<GroupAddIcon />}   onClick={(event) => signUp(nombre, password, email, typeUser, resetData)}>
               Sign up
             </Button>
           </Grid>
-          {/* <Grid xs={2}>
+          <Grid xs={2}>
             <TextField
               id="tipoUsuario"
               select
@@ -69,7 +80,7 @@ export default function Users() {
                 Alumno
               </option>
             </TextField>
-          </Grid> */}
+          </Grid>
         </Grid>
         <Grid container xs={12}>
           <Grid xs={4}>
